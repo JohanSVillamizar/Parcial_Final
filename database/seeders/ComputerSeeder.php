@@ -14,6 +14,6 @@ class ComputerSeeder extends Seeder
      */
     public function run(): void
     {
-        Computer::factory()->count(1)->create();
+        Computer::factory()->count(10)->create();
     }
 }

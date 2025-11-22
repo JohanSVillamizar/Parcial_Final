@@ -9,9 +9,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('computers', ComputerController::class);
+//Route::apiResource('computers', ComputerController::class);
 
-Route::get('categories/active', [CategoryController::class, 'activeCategoriesWithComputers']);
+//Route::get('categories/active', [CategoryController::class, 'activeCategoriesWithComputers']);
 
-Route::apiResource('categories', CategoryController::class)->where(['category' => '[0-9]+']);
+//Route::apiResource('categories', CategoryController::class)->where(['category' => '[0-9]+']);
 

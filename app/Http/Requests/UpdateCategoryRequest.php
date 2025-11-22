@@ -6,26 +6,45 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'categories_name' => 'sometimes|required|string|max:30',
-            'categories_description' => 'sometimes|nullable|string|max:255',
-            'categories_status' => 'sometimes|required|boolean',
-            'categories_created_date' => 'sometimes|nullable|date',
+            'categories_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:100',
+            ],
+
+            'categories_description' => [
+                'nullable',
+                'string',
+                'max:255'
+            ],
+
+            'categories_status' => [
+                'required',
+                'boolean'
+            ]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'categories_name.required' => 'El nombre es obligatorio.',
+            'categories_name.min' => 'El nombre debe tener al menos 3 caracteres.',
+            'categories_name.max' => 'El nombre no puede superar 100 caracteres.',
+
+            'categories_description.max' => 'La descripción no puede superar 255 caracteres.',
+
+            'categories_status.required' => 'Debe seleccionar un estado.',
+            'categories_status.boolean' => 'El estado no es válido.',
         ];
     }
 }
