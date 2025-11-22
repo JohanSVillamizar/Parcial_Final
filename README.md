@@ -1,115 +1,48 @@
-# Proyecto Laravel CRUD - Computers
+# Parcial Final
 
-Este proyecto es un taller de la universidad para aprender a crear un CRUD usando **Laravel** con base de datos en **PostgreSQL**.  
-El modelo que me correspondió hacer en el ERD es `computers`.
+## Requisitos Previos
 
----
+- PHP >= 8.x
+- Composer
+- Node.js y npm
+- PostgreSQL instalado y funcionando
 
-## Requisitos
+## Instalación
 
-- Tener instalado **PHP 8.2 o superior**
-- **Composer** (para instalar dependencias de Laravel)
-- **PostgreSQL** con una base de datos creada llamada `computers_db2`
-- Extensión de PHP `pdo_pgsql` habilitada
+1. Clona el repositorio:
 
----
+2. Instala Jetstream con Inertia y Vue:
 
-## Instalación y configuración
-
-1. Clonar o descargar el proyecto:
-   ```bash
-   git clone <url-del-repo>
-   cd computers-api
-   ```
-
-2. Instalar dependencias:
-   ```bash
-   composer install
-   ```
-
-3. Copiar el archivo `.env.example` y renombrarlo como `.env`, después configurar los datos de la base de datos:
-   ```env
-   DB_CONNECTION=pgsql
-   DB_HOST=127.0.0.1
-   DB_PORT=5432
-   DB_DATABASE=tu_baseDeDatos
-   DB_USERNAME=tu_usuario
-   DB_PASSWORD=tu_contraseña
-   ```
-
-4. Generar la clave de la aplicación:
-   ```bash
-   php artisan key:generate
-   ```
-
-5. Ejecutar migraciones y seeders para crear la tabla y llenarla con datos de prueba:
-   ```bash
-   php artisan migrate --seed
-   ```
-
-6. Levantar el servidor de Laravel:
-   ```bash
-   php artisan serve
-   ```
-   La aplicación quedará disponible en: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-   En Postman o en tus pruebas puedes definir una variable `base_url` con este valor:
-   ```
-   {{base_url}} = http://127.0.0.1:8000/api
-   ```
-
----
-
-## Endpoints principales
-
-> Usa `{{base_url}}` como variable en lugar de escribir la URL completa.
-
-### Listar todos los computadores
-```
-GET {{base_url}}/computers
+```bash
+composer require laravel/jetstream
+php artisan jetstream:install inertia
+npm install
+npm install @vitejs/plugin-vue@^6 --save-dev
+npm install vue-cal
 ```
 
-### Crear un computador
-```
-POST {{base_url}}/computers
-```
-Body en JSON:
-```json
-{
-  "computer_brand": "Dell",
-  "computer_model": "Latitude 7520",
-  "computer_price": 1299.99,
-  "computer_ram_size": 16,
-  "computer_is_laptop": true
-}
+3. Configura PostgreSQL editando el archivo `.env` en la raíz del proyecto:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=tu_BD
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+
 ```
 
-### Ver un computador por id
-```
-GET {{base_url}}/computers/{id}
-```
+4. Ejecuta las migraciones para crear las tablas necesarias:
 
-### Actualizar un computador
-```
-PUT {{base_url}}/computers/{id}
+```bash
+php artisan migrate
 ```
 
-### Eliminar un computador
+5. Ejecuta los seeders
+
+```bash
+php artisan db:seed
 ```
-DELETE {{base_url}}/computers/{id}
-```
 
----
 
-## Probar con Postman
-
-- Definir la variable de entorno `base_url=http://127.0.0.1:8000/api`.  
-- Importar la colección o simplemente crear las solicitudes a mano.  
-- Probar crear, listar, actualizar y eliminar computadores.
-
----
-
-## Notas finales
-
-- El proyecto es solo con fines académicos.  
-- Me sirvió para repasar migraciones, controladores, factories, seeders y autenticación con Sanctum.  
