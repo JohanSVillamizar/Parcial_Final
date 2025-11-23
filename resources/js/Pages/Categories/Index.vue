@@ -102,7 +102,7 @@ function updateCategory() {
     {
       categories_name: editForm.value.categories_name,
       categories_description: editForm.value.categories_description,
-      categories_status: editForm.value.categories_status, // ← AHORA SÍ
+      categories_status: editForm.value.categories_status,
     },
     {
       preserveScroll: true,
@@ -126,21 +126,18 @@ function updateCategory() {
 
 <template>
   <AppLayout title="Categorías">
-    <!-- HEADER -->
+
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Listado de Categorías
       </h2>
     </template>
-
-    <!-- CONTENIDO -->
+>
     <div class="py-10">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        <!-- Card principal -->
         <div class="bg-white shadow-xl sm:rounded-lg p-6">
 
-          <!-- Título + botón -->
           <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-gray-900">Categorías</h1>
 
@@ -150,11 +147,9 @@ function updateCategory() {
             </Link>
           </div>
 
-          <!-- Buscador -->
           <input v-model="filters.search" type="search" placeholder="Buscar por nombre..."
             class="w-full max-w-md p-2 rounded border border-gray-300 mb-4 focus:ring-green-500 focus:border-green-500" />
 
-          <!-- Tabla -->
           <div class="overflow-x-auto">
             <table class="min-w-full bg-white shadow border border-gray-200 rounded-lg">
               <thead class="bg-gray-50 border-b">
@@ -198,7 +193,6 @@ function updateCategory() {
                   </td>
                 </tr>
 
-                <!-- Sin resultados -->
                 <tr v-if="categories.data.length === 0">
                   <td colspan="7" class="text-center py-4 text-gray-500">
                     No se encontraron categorías.
@@ -208,7 +202,6 @@ function updateCategory() {
             </table>
           </div>
 
-          <!-- Paginación -->
           <div class="mt-4 flex justify-center space-x-4">
             <button :disabled="!categories.prev_page_url" @click.prevent="
               router.get(route('categories.index'), {
@@ -241,34 +234,28 @@ function updateCategory() {
       </div>
     </div>
 
-    <!--   MODAL DE EDICIÓN DE CATEGORÍA          -->
     <div v-if="showEditModal" class="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
       <div class="bg-white w-full max-w-lg p-6 rounded shadow-xl">
 
         <h2 class="text-xl font-bold mb-4">Editar Categoría</h2>
 
-        <!-- Nombre -->
         <label class="block font-medium">Nombre:</label>
         <input type="text" v-model="editForm.categories_name" class="w-full border rounded p-2 mb-1" />
         <p v-if="formErrors.categories_name" class="text-red-600 text-sm">
           {{ formErrors.categories_name }}
         </p>
 
-        <!-- Descripción -->
         <label class="block font-medium mt-3">Descripción:</label>
         <textarea v-model="editForm.categories_description" class="w-full border rounded p-2"></textarea>
         <p v-if="formErrors.categories_description" class="text-red-600 text-sm">
           {{ formErrors.categories_description }}
         </p>
 
-        <!-- Estado -->
         <label class="block font-medium mt-3">Estado:</label>
         <select v-model.number="editForm.categories_status" class="w-full border rounded p-2">
           <option :value="1">Activo</option>
           <option :value="0">Inactivo</option>
         </select>
-
-
 
         <p v-if="formErrors.categories_status" class="text-red-600 text-sm">
           {{ formErrors.categories_status }}

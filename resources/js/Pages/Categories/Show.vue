@@ -15,7 +15,6 @@ const props = defineProps({
 
     <div class="max-w-5xl mx-auto mt-8 bg-white shadow rounded p-6">
 
-      <!-- Encabezado -->
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-gray-700">
           Detalles de la Categoría
@@ -26,7 +25,6 @@ const props = defineProps({
         </Link>
       </div>
 
-      <!-- Información de la categoría -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
 
         <div>
@@ -58,7 +56,6 @@ const props = defineProps({
 
       </div>
 
-      <!-- LISTADO DE COMPUTADORAS ASOCIADAS -->
       <div>
         <h2 class="text-xl font-semibold text-gray-700 mb-4">
           Computadores asociados ({{ props.computers.length }})

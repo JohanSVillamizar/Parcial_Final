@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
-// IMPORTANTE: importar los Form Request
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -37,9 +35,6 @@ class CategoryController extends Controller
         return Inertia::render('Categories/Create');
     }
 
-    /**
-     * ✔ STORE usando StoreCategoryRequest
-     */
     public function store(StoreCategoryRequest $request)
     {
         Category::create($request->validated());
@@ -67,9 +62,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * ✔ UPDATE usando UpdateCategoryRequest
-     */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->validated());

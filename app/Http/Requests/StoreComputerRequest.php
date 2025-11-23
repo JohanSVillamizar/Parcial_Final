@@ -6,19 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreComputerRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -28,8 +20,21 @@ class StoreComputerRequest extends FormRequest
             'computer_ram_size' => 'required|integer|min:0',
             'computer_is_laptop' => 'required|boolean',
             'category_id' => 'required|exists:categories,id',
-            'computers_barcode' => 'required|string|size:12|regex:/^[A-Z0-9]{12}$/',
+            'computers_barcode' => [
+                'required',
+                'string',
+                'size:12',
+                'regex:/^[A-Z0-9]{12}$/'
+            ],
+        ];
+    }
 
+    public function messages(): array
+    {
+        return [
+            'computers_barcode.required' => 'El código de barras es obligatorio.',
+            'computers_barcode.size' => 'El código de barras debe tener exactamente 12 caracteres.',
+            'computers_barcode.regex' => 'El código de barras solo puede contener letras mayúsculas y números.',
         ];
     }
 }

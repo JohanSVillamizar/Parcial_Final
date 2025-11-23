@@ -22,11 +22,12 @@ class UpdateComputerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'computer_brand' => 'sometimes|required|string|max:100',
-            'computer_model' => 'sometimes|required|string|max:100',
-            'computer_price' => 'sometimes|required|numeric|min:0',
-            'computer_ram_size' => 'sometimes|required|integer|min:0',
-            'computer_is_laptop' => 'sometimes|required|boolean',
+            'computer_brand'      => ['required', 'string', 'min:2', 'max:100'],
+            'computer_model'      => ['required', 'string', 'min:2', 'max:100'],
+            'computer_price'      => ['required', 'numeric', 'min:0'],
+            'computer_ram_size'   => ['required', 'integer', 'min:1'],
+            'computer_is_laptop'  => ['required', 'boolean'],
+            'category_id'         => ['required', 'exists:categories,id'],
         ];
     }
 }

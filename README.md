@@ -17,6 +17,7 @@
 composer require laravel/jetstream
 php artisan jetstream:install inertia
 npm install
+npm run build
 npm install @vitejs/plugin-vue@^6 --save-dev
 npm install sweetalert2
 ```

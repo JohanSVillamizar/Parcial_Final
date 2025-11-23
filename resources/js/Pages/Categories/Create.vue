@@ -20,7 +20,6 @@ const form = useForm({
     categories_created_date: new Date().toISOString().slice(0, 10) // YYYY-MM-DD
 });
 
-// Para mensajes flash (éxito/error)
 const page = usePage();
 </script>
 
@@ -34,7 +33,6 @@ const page = usePage();
 
         <div class="py-12">
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-                <!-- Mensaje de éxito -->
                 <div
                     v-if="page.props.flash?.success"
                     class="mb-4 p-3 rounded bg-green-100 text-green-800 border border-green-300"
@@ -42,7 +40,6 @@ const page = usePage();
                     {{ page.props.flash.success }}
                 </div>
 
-                <!-- Mensaje de error -->
                 <div
                     v-if="page.props.flash?.error"
                     class="mb-4 p-3 rounded bg-red-100 text-red-800 border border-red-300"
@@ -53,7 +50,6 @@ const page = usePage();
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                     <form @submit.prevent="form.post(route('categories.store'))" class="space-y-6">
 
-                        <!-- Nombre -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Nombre *
@@ -71,7 +67,6 @@ const page = usePage();
                             </div>
                         </div>
 
-                        <!-- Descripción -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Descripción
@@ -87,7 +82,6 @@ const page = usePage();
                             </div>
                         </div>
 
-                        <!-- Estado -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Estado *
@@ -106,7 +100,6 @@ const page = usePage();
                             </div>
                         </div>
 
-                        <!-- Fecha creación -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Fecha creación *
@@ -124,7 +117,6 @@ const page = usePage();
                             </div>
                         </div>
 
-                        <!-- Botones -->
                         <div class="flex items-center justify-end space-x-3">
                             <Link
                                 :href="route('categories.index')"

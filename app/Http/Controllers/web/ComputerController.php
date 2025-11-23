@@ -7,6 +7,9 @@ use App\Models\Computer;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Http\Requests\StoreComputerRequest;
+use App\Http\Requests\UpdateComputerRequest;
+use Illuminate\Support\Str;
 
 class ComputerController extends Controller
 {
@@ -45,9 +48,6 @@ class ComputerController extends Controller
         ]);
     }
 
-    /**
-     * Formulario de creación de computador.
-     */
     public function create()
     {
         return Inertia::render('Computers/Create', [
@@ -56,19 +56,9 @@ class ComputerController extends Controller
         ]);
     }
 
-    /**
-     * Guardar un nuevo computador.
-     */
-    public function store(Request $request)
+    public function store(StoreComputerRequest $request)
     {
-        $validated = $request->validate([
-            'computer_brand'      => ['required', 'string', 'min:2', 'max:100'],
-            'computer_model'      => ['required', 'string', 'min:2', 'max:100'],
-            'computer_price'      => ['required', 'numeric', 'min:0'],
-            'computer_ram_size'   => ['required', 'integer', 'min:1'],
-            'computer_is_laptop'  => ['required', 'boolean'],
-            'category_id'         => ['required', 'exists:categories,id'],
-        ]);
+        $validated = $request->validated();
 
         Computer::create($validated);
 
@@ -77,9 +67,6 @@ class ComputerController extends Controller
             ->with('success', 'Computador creado correctamente.');
     }
 
-    /**
-     * Detalle de computador con su categoría.
-     */
     public function show(Computer $computer)
     {
         $computer->load('category');
@@ -89,9 +76,6 @@ class ComputerController extends Controller
         ]);
     }
 
-    /**
-     * Formulario de edición de computador.
-     */
     public function edit(Computer $computer)
     {
         return Inertia::render('Computers/Edit', [
@@ -100,30 +84,15 @@ class ComputerController extends Controller
         ]);
     }
 
-    /**
-     * Actualizar computador.
-     */
-    public function update(Request $request, Computer $computer)
+    public function update(UpdateComputerRequest $request, Computer $computer)
     {
-        $validated = $request->validate([
-            'computer_brand'      => ['required', 'string', 'min:2', 'max:100'],
-            'computer_model'      => ['required', 'string', 'min:2', 'max:100'],
-            'computer_price'      => ['required', 'numeric', 'min:0'],
-            'computer_ram_size'   => ['required', 'integer', 'min:1'],
-            'computer_is_laptop'  => ['required', 'boolean'],
-            'category_id'         => ['required', 'exists:categories,id'],
-        ]);
-
-        $computer->update($validated);
+        $computer->update($request->validated());
 
         return redirect()
             ->route('computers.index')
             ->with('success', 'Computador actualizado correctamente.');
     }
 
-    /**
-     * Eliminar computador.
-     */
     public function destroy(Computer $computer)
     {
         $computer->delete();

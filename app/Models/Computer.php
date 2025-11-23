@@ -22,6 +22,7 @@ class Computer extends Model
         'computer_ram_size',
         'computer_is_laptop',
         'category_id',
+        'computers_barcode'
     ];
 
     public function category()
